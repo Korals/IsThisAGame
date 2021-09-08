@@ -21,14 +21,19 @@ namespace MaybeGame
         public void DataDump()
         {
             Console.WriteLine($"{nameof(UserName)}: {UserName} | {nameof(ClanName)}: {ClanName}\n" +
-                $"A noble {Race}\n" +
-                $"Levels:\n" +
-                $"{nameof(Strength)}-{Strength}\n" +
-                $"{nameof(Stamina)}-{Stamina}\n" +
-                $"{nameof(Agility)}-{Agility}\n" +
-                $"{nameof(Dexterity)}-{Dexterity}.\n");
+                $"I am {Race}\n\n" +
+                $"Character stats:\n" +
+                $"{nameof(Health)} - {Health}\n" +
+                $"{nameof(Defence)} - {Defence}\n" +
+                $"{nameof(DodgeChance)} - {DodgeChance}\n" +
+                $"{nameof(AttackPower)} - {AttackPower}\n" +
+                $"{nameof(Speed)} - {Speed}\n\n" +
+                $"Stats:\n" +
+                $"{nameof(Strength)} - {Strength}\n" +
+                $"{nameof(Stamina)} - {Stamina}\n" +
+                $"{nameof(Agility)} - {Agility}\n" +
+                $"{nameof(Dexterity)} - {Dexterity}.\n");
         }
-
         private string ChooseARace()
         {
             Console.WriteLine("Please select your race:\n" +
@@ -40,7 +45,6 @@ namespace MaybeGame
             
             return race;
         }
-
         private string RaceInfo()
         {
             var raceName = "N/A";
@@ -77,7 +81,6 @@ namespace MaybeGame
             }
             return raceName;
         }
-
         private int SetStrength(string race)
         {
             // Strength is the quality or state of being physically strong.
