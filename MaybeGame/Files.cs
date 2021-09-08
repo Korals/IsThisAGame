@@ -1,10 +1,10 @@
-﻿namespace MaybeGame
-{
-    partial class Program
-    {
-        public class Files
-        {
+﻿using System;
+using System.Linq;
 
-        }
+namespace MaybeGame
+{
+    public class Files
+    {
+
     }
 }
