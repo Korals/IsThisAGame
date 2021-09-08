@@ -25,14 +25,14 @@ namespace MaybeGame
         public void DataDump()
         {
             Console.WriteLine($"{nameof(UserName)}: {UserName} | {nameof(ClanName)}: {ClanName}\n" +
-                $"I am {Race}\n\n" +
+                $"I am {nameof(Level)}: {Level} {Race}\n" +
+                $"{nameof(ExperiencePoints)}: {ExperiencePoints *100}%\n\n" +
                 $"Character stats:\n" +
                 $"{nameof(Health)} - {Health}\n" +
                 $"{nameof(Defence)} - {Defence}\n" +
                 $"{nameof(DodgeChance)} - {DodgeChance * 100}%\n" +
                 $"{nameof(AttackPower)} - {AttackPower}\n" +
                 $"{nameof(Speed)} - {Speed}\n\n" +
-                $"Stats:\n" +
                 $"{nameof(Strength)} - {Strength}\n" +
                 $"{nameof(Stamina)} - {Stamina}\n" +
                 $"{nameof(Agility)} - {Agility}\n" +
@@ -268,7 +268,7 @@ namespace MaybeGame
             ClanName = clanName;
             Race = ChooseARace();
             ExperiencePoints = SavedExperiencePoints;
-            Level = LevelUp(ExperiencePoints);
+            Level = 1 + LevelUp(ExperiencePoints);
             Strength = SetStrength(Race);
             Stamina = SetStamina(Race);
             Agility = SetAgility(Race);
