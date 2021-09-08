@@ -16,6 +16,10 @@ namespace MaybeGame
         public double DodgeChance { get; set; }
         public double Speed { get; set; }
         public int AttackPower { get; set; }
+        public double ExperiencePoints { get; set; }
+        public double SavedExperiencePoints { get; set; }
+        public int StatPoints { get; set; }
+        public int Level { get; set; }
 
 
         public void DataDump()
@@ -25,7 +29,7 @@ namespace MaybeGame
                 $"Character stats:\n" +
                 $"{nameof(Health)} - {Health}\n" +
                 $"{nameof(Defence)} - {Defence}\n" +
-                $"{nameof(DodgeChance)} - {DodgeChance}\n" +
+                $"{nameof(DodgeChance)} - {DodgeChance * 100}%\n" +
                 $"{nameof(AttackPower)} - {AttackPower}\n" +
                 $"{nameof(Speed)} - {Speed}\n\n" +
                 $"Stats:\n" +
@@ -213,13 +217,10 @@ namespace MaybeGame
         }
         private double SetDodgeChance(int dexterity)
         {
-            var minDodgeChance = 0.00d;
-            var maxDodgeChance = 1.00d;
-            var dodgeChance = 0d;
+            var maxDodgeChance = 0.95d;
+            var dodgeChance = DodgeChance;
 
-            if (dodgeChance <= minDodgeChance)
-                dodgeChance = minDodgeChance;
-            else if (dodgeChance >= maxDodgeChance)
+            if (dodgeChance >= maxDodgeChance)
             {
                 dodgeChance = maxDodgeChance;
                 Console.WriteLine("Dodge chance maxed out(stop adding points to Dexterity)!");
@@ -239,12 +240,35 @@ namespace MaybeGame
         {
             return 15 + (5 * strength);
         }
+        public int LevelUp(double experiencePoints)
+        {
+            var level = Level;
 
+            if (experiencePoints >= 1)
+            {
+                level++;
+                Console.WriteLine("Level up! Congratulations\n" +
+                    $"Your level is now {level}");
+                ExperiencePoints -= 1;
+            }
+            else
+            {
+                ExperiencePoints += experiencePoints;
+            }
+            
+            return level;
+        }
+        public double SaveExperiencePoints(double experiencePoints)
+        {
+           return SavedExperiencePoints += experiencePoints;
+        }
         public void StatSet(string userName, string clanName)
         {
             UserName = userName;
             ClanName = clanName;
             Race = ChooseARace();
+            ExperiencePoints = SavedExperiencePoints;
+            Level = LevelUp(ExperiencePoints);
             Strength = SetStrength(Race);
             Stamina = SetStamina(Race);
             Agility = SetAgility(Race);
@@ -257,5 +281,4 @@ namespace MaybeGame
         }
 
     }
-
 }

@@ -1,6 +1,6 @@
 ﻿namespace MaybeGame
 {
-    partial class Program
+    partial class MainProgram
     {
         public class Files
         {
