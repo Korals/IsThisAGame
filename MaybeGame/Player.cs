@@ -16,7 +16,6 @@ namespace MaybeGame
         public double DodgeChance { get; set; }
         public double Speed { get; set; }
         public int AttackPower { get; set; }
-        public int MagicPower { get; set; }
 
 
         public void DataDump()
