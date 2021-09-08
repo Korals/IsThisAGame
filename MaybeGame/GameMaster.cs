@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MaybeGame
 {
@@ -12,7 +9,7 @@ namespace MaybeGame
         {
             private List<Player> _players { get; } = new();
 
-            public void PlayerDataDump()
+            public void DumpPlayersData()
             {
                 foreach (var p in _players)
                     p.DataDump();
@@ -20,21 +17,32 @@ namespace MaybeGame
 
             public void Start()
             {
+                WriteGameMenu();
+            }
+
+            private void WriteGameMenu()
+            {
                 Console.WriteLine("\nMenu:\n" +
-                    "1. Add new player\n" +
-                    "2. Dump all information\n" +
-                    "3. Quit");
+                            "1. Add new player\n" +
+                            "2. Dump all information\n" +
+                            "3. Quit" +
+                            "4. LevelUp");
 
-                var menu = int.Parse(Console.ReadLine());
+                var success = int.TryParse(Console.ReadLine(), out var menu);
+                if (success == false)
+                {
+                    Console.WriteLine("You have entered a wrong number");
+                    WriteGameMenu();
+                }
+
                 var playerWantsToQuit = false;
-
                 switch (menu)
                 {
                     case 1:
-                        CaseOne();
+                        AddNewPlayer();
                         break;
                     case 2:
-                        PlayerDataDump();
+                        DumpPlayersData();
                         break;
                     case 3:
                         playerWantsToQuit = true;
@@ -48,7 +56,7 @@ namespace MaybeGame
                 else Start();
             }
 
-            private void CaseOne()
+            private void AddNewPlayer()
             {
                 Console.WriteLine("Enter player name");
                 var userName = Console.ReadLine();
