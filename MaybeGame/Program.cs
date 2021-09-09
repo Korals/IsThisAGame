@@ -2,7 +2,7 @@
 
 namespace MaybeGame
 {
-    partial class MainProgram
+    class Program
     {
         static void Main(string[] args)
         {
