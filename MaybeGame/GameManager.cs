@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MaybeGame
 {
-    public class GameMaster
+    public class GameManager
     {
         private List<Player> _players { get; } = new();
         private List<Enemy> _enemies { get; } = new();
@@ -91,7 +91,6 @@ namespace MaybeGame
             _enemies.Add(EnemyConfig.CreateRat());
             */
             Console.WriteLine("Enemies added!");
-
         }
     }
 }

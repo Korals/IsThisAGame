@@ -4,8 +4,8 @@ namespace MaybeGame
 {
     public partial class Player
     {
-        PlayerStats playerStats = new();
-        PlayerExperience playerExperience = new();
+        private PlayerStats playerStats = new();
+        private PlayerExperience playerExperience = new();
 
         public string UserName { get; set; }
         public string ClanName { get; set; }
@@ -28,7 +28,7 @@ namespace MaybeGame
                 $"{nameof(playerStats.Agility)} - {playerStats.Agility}\n" +
                 $"{nameof(playerStats.Dexterity)} - {playerStats.Dexterity}.\n");
         }
-        public PlayerRace RaceInfo()
+        public void RaceInfo()
         {
             Console.WriteLine("Please select your race:\n" +
                 "1. Human\n" +
@@ -36,14 +36,17 @@ namespace MaybeGame
                 "3. Elf\n" +
                 "4. Undead\n");
 
-            var success = int.TryParse(Console.ReadLine(), out var selection);
+            var success = int.TryParse(Console.ReadLine(), out var race);
             if (success == false)
             {
                 Console.WriteLine("You have chosen an invalid option!");
                 RaceInfo();
             }
-
-            switch (selection)
+            ResolvePlayerRace(race);
+        }
+        private void ResolvePlayerRace(int race)
+        {
+            switch (race)
             {
                 case 1:
                     Race = PlayerRace.Human;
@@ -65,9 +68,7 @@ namespace MaybeGame
                     Console.WriteLine("This doesn't work!");
                     break;
             }
-
-            return Race;
         }
-        
+
     }
 }

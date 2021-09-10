@@ -118,14 +118,8 @@ namespace MaybeGame
 
             return dexterity;
         }
-        public int SetHealth(int stamina)
-        {
-            return 50 + (stamina * 3);
-        }
-        public int SetDefence(int stamina)
-        {
-            return 20 + stamina;
-        }
+        public int SetHealth(int stamina) => 50 + (stamina * 3);
+        public int SetDefence(int stamina) => 20 + stamina;
         public double SetDodgeChance(int dexterity)
         {
             var maxDodgeChance = 0.95d;
@@ -142,13 +136,7 @@ namespace MaybeGame
 
             return DodgeChance;
         }
-        public int SetSpeed(int agility)
-        {
-            return 20 + (agility * 2);
-        }
-        public int SetAttackPower(int strength)
-        {
-            return 15 + (5 * strength);
-        }
+        public int SetSpeed(int agility) => 20 + (agility * 2);
+        public int SetAttackPower(int strength) => 15 + (5 * strength);
     }
 }
