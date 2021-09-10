@@ -1,49 +1,65 @@
-﻿namespace MaybeGame
+﻿using System;
+using System.Collections.Generic;
+
+namespace MaybeGame
 {
     public static class EnemyConfig
     {
-        public static Enemy CreateZombie()
+        public static List<Enemy> GenerateEnemies()
         {
-            var enemy = new Enemy();
-            enemy.StatSet("Zombie");
-            return enemy;
+            StatSettings enemyStats = new();
+            var enemies = new List<Enemy>();
+            foreach (EnemyType e in Enum.GetValues(typeof(EnemyType)))
+            {
+                enemyStats.EnemyStatSet(e);
+                enemies.Add(new Enemy(e));
+            }
+            return enemies;
         }
 
+        /* Enemy generation
+        public static Enemy CreateZombie()
+        {
+            var enemy = new StatSettings();
+            enemy.EnemyStatSet(EnemyType.Zombie.ToString());
+            return enemy;
+        }
         public static Enemy CreateSkeleton()
         {
-            Enemy enemy = new();
-            enemy.StatSet("Skeleton");
-            return enemy;
+            StatSettings enemyStats = new(); 
+            enemyStats.EnemyStatSet(EnemyType.Skeleton.ToString());
+            return (Enemy)enemyStats;
         }
         public static Enemy CreateBandit()
         {
             Enemy enemy = new();
-            enemy.StatSet("Bandit");
+            enemy.StatSet(EnemyType.Bandit.ToString());
             return enemy;
         }
-        public static Enemy CreateTheif()
+        public static Enemy CreateThief()
         {
             Enemy enemy = new();
-            enemy.StatSet("Theif");
+            enemy.StatSet(EnemyType.Thief.ToString());
             return enemy;
         }
         public static Enemy CreateWarrior()
         {
-            Enemy enemy= new();
-            enemy.StatSet("Warrior");
+            Enemy enemy = new();
+            enemy.StatSet(EnemyType.Warrior.ToString());
             return enemy;
         }
         public static Enemy CreateBerserker()
         {
             Enemy enemy = new();
-            enemy.StatSet("Berserker");
+            enemy.StatSet(EnemyType.Berserker.ToString());
             return enemy;
         }
         public static Enemy CreateRat()
         {
             Enemy enemy = new();
-            enemy.StatSet("Rat");
+            enemy.StatSet(EnemyType.Rat.ToString());
             return enemy;
         }
+        */
     }
 }

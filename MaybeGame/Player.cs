@@ -2,16 +2,17 @@
 
 namespace MaybeGame
 {
-    public class Player
+    public partial class Player
     {
-        PlayerStats playerStats = new ();
-        PlayerExperience playerExperience = new ();
+        PlayerStats playerStats = new();
+        PlayerExperience playerExperience = new();
 
         public string UserName { get; set; }
         public string ClanName { get; set; }
-        public PlayerRaces Race { get; set; }
+        public PlayerRace Race { get; set; }
+        public PlayerStats Stats { get; set; }
 
-        public void DataDump()
+        public void PlayerDataDump()
         {
             Console.WriteLine($"{nameof(UserName)}: {UserName} | {nameof(ClanName)}: {ClanName}\n" +
                 $"I am {nameof(playerExperience.Level)}: {playerExperience.Level} {Race}\n" +
@@ -27,7 +28,7 @@ namespace MaybeGame
                 $"{nameof(playerStats.Agility)} - {playerStats.Agility}\n" +
                 $"{nameof(playerStats.Dexterity)} - {playerStats.Dexterity}.\n");
         }
-        private PlayerRaces RaceInfo()
+        public PlayerRace RaceInfo()
         {
             Console.WriteLine("Please select your race:\n" +
                 "1. Human\n" +
@@ -45,19 +46,19 @@ namespace MaybeGame
             switch (selection)
             {
                 case 1:
-                    Race = PlayerRaces.Human;
+                    Race = PlayerRace.Human;
                     break;
 
                 case 2:
-                    Race = PlayerRaces.Dwarf;
+                    Race = PlayerRace.Dwarf;
                     break;
 
                 case 3:
-                    Race = PlayerRaces.Elf;
+                    Race = PlayerRace.Elf;
                     break;
 
                 case 4:
-                    Race = PlayerRaces.Undead;
+                    Race = PlayerRace.Undead;
                     break;
 
                 default:
@@ -67,23 +68,6 @@ namespace MaybeGame
 
             return Race;
         }
-
-        public void StatSet(string userName, string clanName)
-        {
-            UserName = userName;
-            ClanName = clanName;
-            Race = (PlayerRaces) RaceInfo();
-            playerExperience.ExperiencePoints = 0;
-            playerExperience.Level = 1;
-            playerStats.Strength = playerStats.SetStrength(Race.ToString());
-            playerStats.Stamina = playerStats.SetStamina(Race.ToString());
-            playerStats.Agility = playerStats.SetAgility(Race.ToString());
-            playerStats.Dexterity = playerStats.SetDexterity(Race.ToString());
-            playerStats.Health = playerStats.SetHealth(playerStats.Stamina);
-            playerStats.Defence = playerStats.SetDefence(playerStats.Stamina);
-            playerStats.DodgeChance = playerStats.SetDodgeChance(playerStats.Dexterity);
-            playerStats.Speed = playerStats.SetSpeed(playerStats.Agility);
-            playerStats.AttackPower = playerStats.SetAttackPower(playerStats.Strength);
-        }
+        
     }
 }

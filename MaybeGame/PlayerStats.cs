@@ -2,20 +2,9 @@
 
 namespace MaybeGame
 {
-    public class PlayerStats
-    {
-        public int Strength { get; set; }
-        public int Stamina { get; set; }
-        public int Agility { get; set; }
-        public int Dexterity { get; set; }
-        public int Health { get; set; }
-        public int Defence { get; set; }
-        public double DodgeChance { get; set; }
-        public double Speed { get; set; }
-        public int AttackPower { get; set; }
-        public int StatPoints { get; set; }
-
-        public int SetStrength(string race)
+    public class PlayerStats : BaseStats
+        {
+        public int SetStrength(PlayerRace race)
         {
             // Strength is the quality or state of being physically strong.
 
@@ -23,19 +12,19 @@ namespace MaybeGame
 
             switch (race)
             {
-                case "Human":
+                case PlayerRace.Human:
                     strength += 2;
                     break;
 
-                case "Dwarf":
+                case PlayerRace.Dwarf:
                     strength += 5;
                     break;
 
-                case "Elf":
+                case PlayerRace.Elf:
                     strength += 1;
                     break;
 
-                case "Undead":
+                case PlayerRace.Undead:
                     strength += 4;
                     break;
 
@@ -46,7 +35,7 @@ namespace MaybeGame
 
             return strength;
         }
-        public int SetStamina(string race)
+        public int SetStamina(PlayerRace race)
         {
             // Stamina is the ability to sustain prolonged physical or mental effort.
 
@@ -54,19 +43,15 @@ namespace MaybeGame
 
             switch (race)
             {
-                case "Human":
+                case PlayerRace.Human or PlayerRace.Elf:
                     stamina += 5;
                     break;
 
-                case "Dwarf":
+                case PlayerRace.Dwarf:
                     stamina += 4;
                     break;
 
-                case "Elf":
-                    stamina += 5;
-                    break;
-
-                case "Undead":
+                case PlayerRace.Undead:
                     stamina += 7;
                     break;
 
@@ -77,26 +62,26 @@ namespace MaybeGame
 
             return stamina;
         }
-        public int SetAgility(string race)
+        public int SetAgility(PlayerRace race)
         {
             // Agility is the ability to move quickly and easily.
             var agility = 5;
 
             switch (race)
             {
-                case "Human":
+                case PlayerRace.Human:
                     agility += 3;
                     break;
 
-                case "Dwarf":
+                case PlayerRace.Dwarf:
                     agility += 2;
                     break;
 
-                case "Elf":
+                case PlayerRace.Elf:
                     agility += 7;
                     break;
 
-                case "Undead":
+                case PlayerRace.Undead:
                     agility += 1;
                     break;
 
@@ -107,27 +92,23 @@ namespace MaybeGame
 
             return agility;
         }
-        public int SetDexterity(string race)
+        public int SetDexterity(PlayerRace race)
         {
             // Dexterity is the readiness and grace in physical activity.
             var dexterity = 5;
 
             switch (race)
             {
-                case "Human":
+                case PlayerRace.Human:
                     dexterity += 3;
                     break;
 
-                case "Dwarf":
+                case PlayerRace.Dwarf or PlayerRace.Undead:
                     dexterity += 2;
                     break;
 
-                case "Elf":
+                case PlayerRace.Elf:
                     dexterity += 5;
-                    break;
-
-                case "Undead":
-                    dexterity += 2;
                     break;
 
                 default:

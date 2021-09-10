@@ -11,12 +11,12 @@ namespace MaybeGame
         public void DumpPlayersData()
         {
             foreach (var p in _players)
-                p.DataDump();
+                p.PlayerDataDump();
         }
         public void DumpEnemiesData()
         {
             foreach (var e in _enemies)
-                e.DataDump();
+                e.EnemyDataDump();
         }
 
         public void Start()
@@ -73,20 +73,23 @@ namespace MaybeGame
             var userName = Console.ReadLine();
             Console.WriteLine("Enter clan name");
             var clanName = Console.ReadLine();
-            var player = new Player();
-            player.StatSet(userName, clanName);
-            _players.Add(player);
+            var stats = new StatSettings();
+            stats.PlayerStatSet(userName, clanName);
+            _players.Add(stats);
         }
         private void AddEnemies()
         {
             Console.WriteLine("Adding enemies");
+            _enemies.AddRange(EnemyConfig.GenerateEnemies());
+            /*
             _enemies.Add(EnemyConfig.CreateZombie());
             _enemies.Add(EnemyConfig.CreateSkeleton());
             _enemies.Add(EnemyConfig.CreateBandit());
-            _enemies.Add(EnemyConfig.CreateTheif());
+            _enemies.Add(EnemyConfig.CreateThief());
             _enemies.Add(EnemyConfig.CreateWarrior());
             _enemies.Add(EnemyConfig.CreateBerserker());
             _enemies.Add(EnemyConfig.CreateRat());
+            */
             Console.WriteLine("Enemies added!");
 
         }

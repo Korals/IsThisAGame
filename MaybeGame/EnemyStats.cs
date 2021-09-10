@@ -2,19 +2,9 @@
 
 namespace MaybeGame
 {
-    public class EnemyStats
+    public class EnemyStats : BaseStats
     {
-        public int Strength { get; set; }
-        public int Stamina { get; set; }
-        public int Agility { get; set; }
-        public int Dexterity { get; set; }
-        public int Health { get; set; }
-        public int Defence { get; set; }
-        public double DodgeChance { get; set; }
-        public int Speed { get; set; }
-        public int AttackPower { get; set; }
-
-        public int SetStrength(string enemy)
+        public int SetStrength(EnemyType enemy)
         {
             // Strength is the quality or state of being physically strong.
 
@@ -22,32 +12,20 @@ namespace MaybeGame
 
             switch (enemy)
             {
-                case "Zombie":
+                case EnemyType.Skeleton or EnemyType.Zombie or EnemyType.Thief:
                     strength += 2;
                     break;
 
-                case "Skeleton":
-                    strength += 2;
+                case EnemyType.Berserker:
+                    strength += 5;
                     break;
 
-                case "Bandit":
-                    strength += 3;
+                case EnemyType.Rat:
+                    strength += 1;
                     break;
 
-                case "Theif":
-                    strength += 2;
-                    break;
-
-                case "Warrior":
+                case EnemyType.Bandit or EnemyType.Warrior:
                     strength += 4;
-                    break;
-                
-                case "Berserker":
-                    strength += 7;
-                    break;
-                
-                case "Rat":
-                    strength += 0;
                     break;
 
                 default:
@@ -57,7 +35,7 @@ namespace MaybeGame
 
             return strength;
         }
-        public int SetStamina(string enemy)
+        public int SetStamina(EnemyType enemy)
         {
             // Stamina is the ability to sustain prolonged physical or mental effort.
 
@@ -65,108 +43,80 @@ namespace MaybeGame
 
             switch (enemy)
             {
-                case "Zombie":
-                    stamina += 2;
-                    break;
-
-                case "Skeleton":
-                    stamina += 2;
-                    break;
-
-                case "Bandit":
-                    stamina += 3;
-                    break;
-
-                case "Theif":
-                    stamina += 2;
-                    break;
-
-                case "Warrior":
+                case EnemyType.Bandit or EnemyType.Zombie or EnemyType.Skeleton:
                     stamina += 5;
                     break;
 
-                case "Berserker":
+                case EnemyType.Berserker or EnemyType.Thief:
                     stamina += 2;
                     break;
 
-                case "Rat":
+                case EnemyType.Rat:
                     stamina += 1;
+                    break;
+
+                case EnemyType.Warrior:
+                    stamina += 7;
+                    break;
+
+                default:
+                    Console.WriteLine("Error 404: Race not found");
                     break;
             }
 
             return stamina;
         }
-        public int SetAgility(string enemy)
+        public int SetAgility(EnemyType enemy)
         {
             // Agility is the ability to move quickly and easily.
             var agility = 5;
 
             switch (enemy)
             {
-                case "Zombie":
+                case EnemyType.Warrior or EnemyType.Bandit:
+                    agility += 3;
+                    break;
+
+                case EnemyType.Skeleton:
                     agility += 2;
                     break;
 
-                case "Skeleton":
-                    agility += 2;
-                    break;
-
-                case "Bandit":
-                    agility += 4;
-                    break;
-
-                case "Theif":
+                case EnemyType.Berserker or EnemyType.Thief or EnemyType.Rat:
                     agility += 7;
                     break;
 
-                case "Warrior":
-                    agility += 2;
+                case EnemyType.Zombie:
+                    agility += 1;
                     break;
 
-                case "Berserker":
-                    agility += 5;
-                    break;
-
-                case "Rat":
-                    agility += 5;
+                default:
+                    Console.WriteLine("Error 404: Race not found");
                     break;
             }
 
             return agility;
         }
-        public int SetDexterity(string enemy)
+        public int SetDexterity(EnemyType enemy)
         {
             // Dexterity is the readiness and grace in physical activity.
             var dexterity = 5;
 
             switch (enemy)
             {
-                case "Zombie":
+                case EnemyType.Skeleton or EnemyType.Zombie:
+                    dexterity += 3;
+                    break;
+
+                case EnemyType.Berserker or EnemyType.Bandit:
                     dexterity += 2;
                     break;
 
-                case "Skeleton":
-                    dexterity += 3;
-                    break;
-
-                case "Bandit":
-                    dexterity += 3;
-                    break;
-
-                case "Theif":
+                case EnemyType.Warrior or EnemyType.Rat or EnemyType.Thief:
                     dexterity += 5;
                     break;
 
-                case "Warrior":
-                    dexterity += 4;
-                    break;
-
-                case "Berserker":
-                    dexterity += 1;
-                    break;
-
-                case "Rat":
-                    dexterity += 3;
+                default:
+                    Console.WriteLine("Error 404: Race not found");
                     break;
             }
 
@@ -204,6 +154,5 @@ namespace MaybeGame
         {
             return 15 + (5 * strength);
         }
-
     }
 }

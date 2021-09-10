@@ -1,6 +1,6 @@
 ﻿namespace MaybeGame
 {
-    public enum PlayerRaces
+    public enum PlayerRace
     {
         Human,
         Dwarf,
