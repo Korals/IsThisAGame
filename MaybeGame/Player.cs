@@ -28,7 +28,7 @@ namespace MaybeGame
                 $"{nameof(playerStats.Agility)} - {playerStats.Agility}\n" +
                 $"{nameof(playerStats.Dexterity)} - {playerStats.Dexterity}.\n");
         }
-        public void RaceInfo()
+        public PlayerRace RaceInfo()
         {
             Console.WriteLine("Please select your race:\n" +
                 "1. Human\n" +
@@ -36,13 +36,19 @@ namespace MaybeGame
                 "3. Elf\n" +
                 "4. Undead\n");
 
+            var race = ParsePlayerRace();
+            ResolvePlayerRace(race);
+            return Race;
+        }
+        private int ParsePlayerRace()
+        {
             var success = int.TryParse(Console.ReadLine(), out var race);
             if (success == false)
             {
                 Console.WriteLine("You have chosen an invalid option!");
-                RaceInfo();
+                ParsePlayerRace();
             }
-            ResolvePlayerRace(race);
+            return race;
         }
         private void ResolvePlayerRace(int race)
         {
@@ -65,10 +71,10 @@ namespace MaybeGame
                     break;
 
                 default:
-                    Console.WriteLine("This doesn't work!");
+                    Console.WriteLine("This doesn't work. Try again!");
+                    RaceInfo();
                     break;
             }
         }
-
     }
 }

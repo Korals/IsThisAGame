@@ -7,11 +7,9 @@ namespace MaybeGame
     {
         public static List<Enemy> GenerateEnemies()
         {
-            StatSettings enemyStats = new();
             var enemies = new List<Enemy>();
             foreach (EnemyType e in Enum.GetValues(typeof(EnemyType)))
             {
-                enemyStats.EnemyStatSet(e);
                 enemies.Add(new Enemy(e));
             }
             return enemies;

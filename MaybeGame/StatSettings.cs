@@ -1,6 +1,6 @@
 ﻿namespace MaybeGame
 {
-    public class StatSettings
+    public class StatSettings : Player
     {
         public void PlayerStatSet(string userName, string clanName)
         {
@@ -9,7 +9,7 @@
             PlayerExperience playerExperience = new();
             player.UserName = userName;
             player.ClanName = clanName;
-            player.Race = (PlayerRace)player.RaceInfo();
+            player.Race = player.RaceInfo();
             playerExperience.ExperiencePoints = 0;
             playerExperience.Level = 1;
             playerStats.Strength = playerStats.SetStrength(player.Race);

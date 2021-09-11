@@ -69,13 +69,21 @@ namespace MaybeGame
 
         private void AddNewPlayer()
         {
+            var stats = new StatSettings();
+            var playerData = ParsePlayerData();
+            var userName = playerData[0];
+            var clanName = playerData[1];
+            stats.PlayerStatSet(userName, clanName);
+            _players.Add(stats);
+        }
+        private string[] ParsePlayerData()
+        {
             Console.WriteLine("Enter player name");
             var userName = Console.ReadLine();
             Console.WriteLine("Enter clan name");
             var clanName = Console.ReadLine();
-            var stats = new StatSettings();
-            stats.PlayerStatSet(userName, clanName);
-            _players.Add(stats);
+            var playerData = new string[] {userName, clanName };
+            return playerData;
         }
         private void AddEnemies()
         {
