@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace MaybeGame
+﻿namespace MaybeGame.Stats
 {
-    public partial class BaseStats
+    public class BaseStats
     {
         public int Strength { get; set; }
         public int Stamina { get; set; }
@@ -14,6 +12,5 @@ namespace MaybeGame
         public double Speed { get; set; }
         public int AttackPower { get; set; }
         public int StatPoints { get; set; }
-        
     }
 }

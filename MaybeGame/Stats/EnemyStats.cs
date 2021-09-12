@@ -1,10 +1,24 @@
 ﻿using System;
+using MaybeGame.Enemies;
 
-namespace MaybeGame
+namespace MaybeGame.Stats
 {
     public class EnemyStats : BaseStats
     {
-        public int SetStrength(EnemyType enemy)
+        public EnemyStats(EnemyRace race)
+        {
+            Strength = CalculateStrength(race);
+            Stamina = CalculateStamina(race);
+            Agility = CalculateAgility(race);
+            Dexterity = CalculateDexterity(race);
+            Health = CalculateHealth();
+            Defence = CalculateDefence();
+            DodgeChance = CalculateDodgeChance();
+            Speed = CalculateSpeed();
+            AttackPower = CalculateAttackPower();
+        }
+
+        private static int CalculateStrength(EnemyRace enemy)
         {
             // Strength is the quality or state of being physically strong.
 
@@ -12,19 +26,19 @@ namespace MaybeGame
 
             switch (enemy)
             {
-                case EnemyType.Skeleton or EnemyType.Zombie or EnemyType.Thief:
+                case EnemyRace.Skeleton or EnemyRace.Zombie or EnemyRace.Thief:
                     strength += 2;
                     break;
 
-                case EnemyType.Berserker:
+                case EnemyRace.Berserker:
                     strength += 5;
                     break;
 
-                case EnemyType.Rat:
+                case EnemyRace.Rat:
                     strength += 1;
                     break;
 
-                case EnemyType.Bandit or EnemyType.Warrior:
+                case EnemyRace.Bandit or EnemyRace.Warrior:
                     strength += 4;
                     break;
 
@@ -35,7 +49,8 @@ namespace MaybeGame
 
             return strength;
         }
-        public int SetStamina(EnemyType enemy)
+
+        private int CalculateStamina(EnemyRace enemy)
         {
             // Stamina is the ability to sustain prolonged physical or mental effort.
 
@@ -43,19 +58,19 @@ namespace MaybeGame
 
             switch (enemy)
             {
-                case EnemyType.Bandit or EnemyType.Zombie or EnemyType.Skeleton:
+                case EnemyRace.Bandit or EnemyRace.Zombie or EnemyRace.Skeleton:
                     stamina += 5;
                     break;
 
-                case EnemyType.Berserker or EnemyType.Thief:
+                case EnemyRace.Berserker or EnemyRace.Thief:
                     stamina += 2;
                     break;
 
-                case EnemyType.Rat:
+                case EnemyRace.Rat:
                     stamina += 1;
                     break;
 
-                case EnemyType.Warrior:
+                case EnemyRace.Warrior:
                     stamina += 7;
                     break;
 
@@ -66,26 +81,27 @@ namespace MaybeGame
 
             return stamina;
         }
-        public int SetAgility(EnemyType enemy)
+
+        private int CalculateAgility(EnemyRace enemy)
         {
             // Agility is the ability to move quickly and easily.
             var agility = 5;
 
             switch (enemy)
             {
-                case EnemyType.Warrior or EnemyType.Bandit:
+                case EnemyRace.Warrior or EnemyRace.Bandit:
                     agility += 3;
                     break;
 
-                case EnemyType.Skeleton:
+                case EnemyRace.Skeleton:
                     agility += 2;
                     break;
 
-                case EnemyType.Berserker or EnemyType.Thief or EnemyType.Rat:
+                case EnemyRace.Berserker or EnemyRace.Thief or EnemyRace.Rat:
                     agility += 7;
                     break;
 
-                case EnemyType.Zombie:
+                case EnemyRace.Zombie:
                     agility += 1;
                     break;
 
@@ -96,22 +112,23 @@ namespace MaybeGame
 
             return agility;
         }
-        public int SetDexterity(EnemyType enemy)
+
+        private int CalculateDexterity(EnemyRace enemy)
         {
             // Dexterity is the readiness and grace in physical activity.
             var dexterity = 5;
 
             switch (enemy)
             {
-                case EnemyType.Skeleton or EnemyType.Zombie:
+                case EnemyRace.Skeleton or EnemyRace.Zombie:
                     dexterity += 3;
                     break;
 
-                case EnemyType.Berserker or EnemyType.Bandit:
+                case EnemyRace.Berserker or EnemyRace.Bandit:
                     dexterity += 2;
                     break;
 
-                case EnemyType.Warrior or EnemyType.Rat or EnemyType.Thief:
+                case EnemyRace.Warrior or EnemyRace.Rat or EnemyRace.Thief:
                     dexterity += 5;
                     break;
 
@@ -122,9 +139,11 @@ namespace MaybeGame
 
             return dexterity;
         }
-        public int SetHealth(int stamina) => 50 + (stamina * 3);
-        public int SetDefence(int stamina) => 20 + stamina;
-        public double SetDodgeChance(int dexterity)
+
+        private int CalculateHealth() => 50 + (Stamina * 3);
+        private int CalculateDefence() => 20 + Stamina;
+
+        private double CalculateDodgeChance()
         {
             var maxDodgeChance = 0.95d;
 
@@ -135,12 +154,13 @@ namespace MaybeGame
             }
             else
             {
-                DodgeChance += dexterity * 0.005;
+                DodgeChance += Dexterity * 0.005;
             }
 
             return DodgeChance;
         }
-        public int SetSpeed(int agility) => 20 + (agility * 2);
-        public int SetAttackPower(int strength) => 15 + (5 * strength);
+
+        private int CalculateSpeed() => 20 + (Agility * 2);
+        private int CalculateAttackPower() => 15 + (5 * Strength);
     }
 }

@@ -1,9 +1,23 @@
 ﻿using System;
+using MaybeGame.Players;
 
-namespace MaybeGame
+namespace MaybeGame.Stats
 {
     public class PlayerStats : BaseStats
+    {
+        public PlayerStats(PlayerRace race)
         {
+            Strength = SetStrength(race);
+            Stamina = SetStamina(race);
+            Agility = SetAgility(race);
+            Dexterity = SetDexterity(race);
+            Health = SetHealth(Stamina);
+            Defence = SetDefence(Stamina);
+            DodgeChance = SetDodgeChance(Dexterity);
+            Speed = SetSpeed(Agility);
+            AttackPower = SetAttackPower(Strength);
+        }
+
         public int SetStrength(PlayerRace race)
         {
             // Strength is the quality or state of being physically strong.
@@ -35,6 +49,7 @@ namespace MaybeGame
 
             return strength;
         }
+
         public int SetStamina(PlayerRace race)
         {
             // Stamina is the ability to sustain prolonged physical or mental effort.
@@ -62,6 +77,7 @@ namespace MaybeGame
 
             return stamina;
         }
+
         public int SetAgility(PlayerRace race)
         {
             // Agility is the ability to move quickly and easily.
@@ -92,6 +108,7 @@ namespace MaybeGame
 
             return agility;
         }
+
         public int SetDexterity(PlayerRace race)
         {
             // Dexterity is the readiness and grace in physical activity.
@@ -118,8 +135,10 @@ namespace MaybeGame
 
             return dexterity;
         }
+
         public int SetHealth(int stamina) => 50 + (stamina * 3);
         public int SetDefence(int stamina) => 20 + stamina;
+
         public double SetDodgeChance(int dexterity)
         {
             var maxDodgeChance = 0.95d;
@@ -136,6 +155,7 @@ namespace MaybeGame
 
             return DodgeChance;
         }
+
         public int SetSpeed(int agility) => 20 + (agility * 2);
         public int SetAttackPower(int strength) => 15 + (5 * strength);
     }

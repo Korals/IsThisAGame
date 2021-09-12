@@ -1,6 +1,6 @@
-﻿namespace MaybeGame
+﻿namespace MaybeGame.Enemies
 {
-    public enum EnemyType
+    public enum EnemyRace
     {
         Zombie,
         Skeleton,

@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using MaybeGame.Config;
+using MaybeGame.Enemies;
+using MaybeGame.Players;
 
 namespace MaybeGame
 {
     public class GameManager
     {
-        private List<Player> _players { get; } = new();
-        private List<Enemy> _enemies { get; } = new();
+        private List<Player> Players { get; } = new();
+        private List<Enemy> Enemies { get; } = new();
 
-        public void DumpPlayersData()
+        private void DumpPlayersData()
         {
-            foreach (var p in _players)
-                p.PlayerDataDump();
+            foreach (var p in Players)
+                p.DumpPlayerData();
         }
-        public void DumpEnemiesData()
+
+        private void DumpEnemiesData()
         {
-            foreach (var e in _enemies)
-                e.EnemyDataDump();
+            foreach (var e in Enemies)
+                e.DumpEnemyData();
         }
 
         public void Start()
@@ -27,11 +31,11 @@ namespace MaybeGame
         private void WriteGameMenu()
         {
             Console.WriteLine("\nMenu:\n" +
-                        "1. Add new player\n" +
-                        "2. Add Enemies\n" +
-                        "3. Dump all player information\n" +
-                        "4. Dump all enemy information\n" +
-                        "5. Quit\n");
+                              "1. Add new player\n" +
+                              "2. Add Enemies\n" +
+                              "3. Dump all player information\n" +
+                              "4. Dump all enemy information\n" +
+                              "5. Quit\n");
 
             var success = int.TryParse(Console.ReadLine(), out var menu);
             if (success == false)
@@ -69,35 +73,41 @@ namespace MaybeGame
 
         private void AddNewPlayer()
         {
-            var stats = new StatSettings();
-            var playerData = ParsePlayerData();
-            var userName = playerData[0];
-            var clanName = playerData[1];
-            stats.PlayerStatSet(userName, clanName);
-            _players.Add(stats);
+            var (userName, clanName, race) = ParsePlayerData();
+
+            var player = new Player(userName, clanName, race);
+
+            Players.Add(player);
         }
-        private string[] ParsePlayerData()
+
+        private (string UserName, string ClanName, int Race) ParsePlayerData()
         {
             Console.WriteLine("Enter player name");
             var userName = Console.ReadLine();
             Console.WriteLine("Enter clan name");
             var clanName = Console.ReadLine();
-            var playerData = new string[] {userName, clanName };
-            return playerData;
+            var race = ParseRace();
+
+            return (userName, clanName, race);
         }
+
+        private static int ParseRace()
+        {
+            Console.WriteLine("Please select your race:\n" +
+                              "1. Human\n" +
+                              "2. Drawf\n" +
+                              "3. Elf\n" +
+                              "4. Undead\n");
+
+            var race = Console.ReadLine();
+
+            return int.TryParse(race, out var raceNo) ? raceNo : ParseRace();
+        }
+
         private void AddEnemies()
         {
-            Console.WriteLine("Adding enemies");
-            _enemies.AddRange(EnemyConfig.GenerateEnemies());
-            /*
-            _enemies.Add(EnemyConfig.CreateZombie());
-            _enemies.Add(EnemyConfig.CreateSkeleton());
-            _enemies.Add(EnemyConfig.CreateBandit());
-            _enemies.Add(EnemyConfig.CreateThief());
-            _enemies.Add(EnemyConfig.CreateWarrior());
-            _enemies.Add(EnemyConfig.CreateBerserker());
-            _enemies.Add(EnemyConfig.CreateRat());
-            */
+            Console.WriteLine("Adding enemies...");
+            Enemies.AddRange(EnemyConfig.GenerateEnemies());
             Console.WriteLine("Enemies added!");
         }
     }
