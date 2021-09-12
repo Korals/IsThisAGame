@@ -2,16 +2,15 @@
 
 namespace MaybeGame
 {
-    partial class MainProgram
+    class Program
     {
         static void Main(string[] args)
         {
             //Main code goes here
-            var gameMaster = new GameMaster();
+            var gameMaster = new GameManager();
 
-            Console.WriteLine("Hello and welcome to (Game name here)\n Created by Koralg\n");
+            Console.WriteLine("Hello and welcome to (Game name here)\n Created by Koral\n");
             gameMaster.Start();
-
         }
     }
 }
