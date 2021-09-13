@@ -5,6 +5,7 @@ namespace MaybeGame.Enemies
 {
     public class Enemy
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public EnemyStats Stats { get; set; }
         public EnemyRace Race { get; set; }
