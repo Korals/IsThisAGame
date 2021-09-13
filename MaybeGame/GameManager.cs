@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using MaybeGame.Config;
+﻿using MaybeGame.Config;
 using MaybeGame.Enemies;
 using MaybeGame.Players;
+using System;
+using System.Collections.Generic;
 
 namespace MaybeGame
 {
@@ -27,8 +27,12 @@ namespace MaybeGame
         {
             WriteGameMenu();
         }
-
         private void WriteGameMenu()
+        {
+            var menuSelection = ParseMenuData();
+            PlayerMenuChoice(menuSelection);
+        }
+        private int ParseMenuData()
         {
             Console.WriteLine("\nMenu:\n" +
                               "1. Add new player\n" +
@@ -36,14 +40,16 @@ namespace MaybeGame
                               "3. Dump all player information\n" +
                               "4. Dump all enemy information\n" +
                               "5. Quit\n");
-
             var success = int.TryParse(Console.ReadLine(), out var menu);
             if (success == false)
             {
                 Console.WriteLine("You have entered a wrong number");
-                WriteGameMenu();
+                ParseMenuData();
             }
-
+            return menu;
+        }
+        private void PlayerMenuChoice(int menu)
+        {
             var playerWantsToQuit = false;
             switch (menu)
             {
