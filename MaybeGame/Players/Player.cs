@@ -1,18 +1,20 @@
-﻿using System;
-using MaybeGame.Stats;
+﻿using MaybeGame.Stats;
+using System;
 
 namespace MaybeGame.Players
 {
     public class Player
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string ClanName { get; set; }
         public PlayerRace Race { get; set; }
         public PlayerStats Stats { get; set; }
         public PlayerExperience PlayerExperience { get; set; }
 
-        public Player(string userName, string clanName, int race)
+        public Player(string userName, string clanName, int race, int id)
         {
+            Id = id;
             UserName = userName;
             ClanName = clanName;
             Race = ResolvePlayerRace(race);
@@ -45,5 +47,11 @@ namespace MaybeGame.Players
             4 => PlayerRace.Undead,
             _ => PlayerRace.Unset
         };
+
+        public void GetPlayerNameAndLevel(int number)
+        {
+            Console.WriteLine($"{number}. {nameof(UserName)}: {UserName}\n" +
+                $"{nameof(PlayerExperience.Level)} {PlayerExperience.Level}  {Race}\n");
+        }
     }
 }
